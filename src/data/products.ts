@@ -5,9 +5,9 @@ export const products: Product[] = [
     id: '1',
     name: 'Cutie Patootie cup',
     description: 'Premium cutie patootie cup with super sweet cherry on it.',
-    price: 299.99,
+    price: 24.99,
     category: 'electronics',
-    image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=400&fit=crop',
+    image: '/models/cup1.png',
     colors: ['Black', 'White', 'Blue'],
     sizes: ['One Size']
   },
