@@ -114,6 +114,50 @@ const CupModel: React.FC = () => {
   );
 };
 
+const TShirtModel: React.FC = () => {
+  const meshRef = useRef<THREE.Group>(null);
+  const [model, setModel] = useState<THREE.Group | null>(null);
+
+  useEffect(() => {
+    const loader = new FBXLoader();
+    loader.load('/models/Basic Tee1 Model.fbx', (object) => {
+      object.scale.set(0.01, 0.01, 0.01);
+      object.position.set(0, 2, 0);
+      
+      object.traverse((child) => {
+        if (child instanceof THREE.Mesh) {
+          if (child.material) {
+            child.material.needsUpdate = true;
+            if (child.material.color) {
+              child.material.color.multiplyScalar(1.2);
+            }
+          }
+        }
+      });
+      
+      setModel(object);
+    });
+  }, []);
+
+  if (!model) {
+    return (
+      <mesh position={[0, 0, 0]}>
+        <boxGeometry args={[1, 1.5, 0.1]} />
+        <meshStandardMaterial color="#4a90e2" metalness={0.1} roughness={0.8} />
+      </mesh>
+    );
+  }
+
+  return (
+    <primitive 
+      ref={meshRef} 
+      object={model} 
+      position={[0, -1.5, 0]} 
+      scale={[0.01, 0.01, 0.01]}
+    />
+  );
+};
+
 const ProductModel: React.FC<{ product: Product }> = ({ product }) => {
   const meshRef = useRef<THREE.Mesh>(null);
 
@@ -161,6 +205,7 @@ const Product3DViewer: React.FC<Product3DViewerProps> = ({ product }) => {
   };
 
   const isFirstProduct = product.id === '1';
+  const isSecondProduct = product.id === '2';
 
   return (
     <ViewerContainer>
@@ -170,7 +215,6 @@ const Product3DViewer: React.FC<Product3DViewerProps> = ({ product }) => {
       </ProductInfo>
 
       <Canvas camera={{ position: [0, 0, 5], fov: 50 }}>
-        {/* Enhanced lighting setup for better model visibility */}
         <ambientLight intensity={0.8} />
         <directionalLight 
           position={[5, 5, 5]} 
@@ -197,6 +241,8 @@ const Product3DViewer: React.FC<Product3DViewerProps> = ({ product }) => {
         
         {isFirstProduct ? (
           <CupModel />
+        ) : isSecondProduct ? (
+          <TShirtModel />
         ) : (
           <ProductModel product={product} />
         )}

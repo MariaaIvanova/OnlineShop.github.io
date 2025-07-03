@@ -13,10 +13,10 @@ export const products: Product[] = [
   },
   {
     id: '2',
-    name: 'Ergonomic Office Chair',
-    description: 'Comfortable and stylish office chair designed for long working hours with adjustable features.',
-    price: 599.99,
-    category: 'furniture',
+    name: 'Cutie Patootie t-shirt',
+    description: 'Comfortable and stylish Cutie Patootie t-shirt designed for literal divas.',
+    price: 20.99,
+    category: 'clothes',
     image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=400&fit=crop',
     colors: ['Gray', 'Black', 'Brown'],
     sizes: ['Standard']
