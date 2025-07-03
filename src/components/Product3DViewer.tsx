@@ -70,7 +70,6 @@ const ProductDescription = styled.p`
   line-height: 1.4;
 `;
 
-// FBX Model component for the first product
 const CupModel: React.FC = () => {
   const meshRef = useRef<THREE.Group>(null);
   const [model, setModel] = useState<THREE.Group | null>(null);
@@ -78,19 +77,15 @@ const CupModel: React.FC = () => {
   useEffect(() => {
     const loader = new FBXLoader();
     loader.load('/models/Cup1 model.fbx', (object) => {
-      // Scale and position the model appropriately
       object.scale.set(0.01, 0.01, 0.01);
-      object.position.set(0, 2, 0); // Move up slightly
+      object.position.set(0, 2, 0);
       
-      // Preserve original materials and lighting
       object.traverse((child) => {
         if (child instanceof THREE.Mesh) {
-          // Keep original materials if they exist
           if (child.material) {
             child.material.needsUpdate = true;
-            // Ensure materials are not too dark
             if (child.material.color) {
-              child.material.color.multiplyScalar(1.2); // Brighten slightly
+              child.material.color.multiplyScalar(1.2);
             }
           }
         }
@@ -119,11 +114,9 @@ const CupModel: React.FC = () => {
   );
 };
 
-// Simple 3D model component for other products
 const ProductModel: React.FC<{ product: Product }> = ({ product }) => {
   const meshRef = useRef<THREE.Mesh>(null);
 
-  // Generate different 3D shapes based on product category
   const getModelGeometry = () => {
     switch (product.category) {
       case 'electronics':
@@ -158,10 +151,8 @@ const Product3DViewer: React.FC<Product3DViewerProps> = ({ product }) => {
   const [autoRotate, setAutoRotate] = useState(false);
 
   const handleResetView = () => {
-    // Reset camera position
     const controls = document.querySelector('canvas')?.parentElement?.querySelector('div');
     if (controls) {
-      // This would reset the OrbitControls in a real implementation
     }
   };
 
@@ -169,7 +160,6 @@ const Product3DViewer: React.FC<Product3DViewerProps> = ({ product }) => {
     setAutoRotate(!autoRotate);
   };
 
-  // Check if this is the first product (Cup1 model)
   const isFirstProduct = product.id === '1';
 
   return (

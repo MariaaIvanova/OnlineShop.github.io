@@ -6,7 +6,7 @@ export const products: Product[] = [
     name: 'Cutie Patootie cup',
     description: 'Premium cutie patootie cup with super sweet cherry on it.',
     price: 24.99,
-    category: 'electronics',
+    category: 'furniture',
     image: '/models/cup1.png',
     colors: ['Black', 'White', 'Blue'],
     sizes: ['One Size']
@@ -80,5 +80,35 @@ export const products: Product[] = [
     image: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=400&h=400&fit=crop',
     colors: ['Navy', 'Gray', 'Beige'],
     sizes: ['Standard']
+  },
+  {
+    id: '9',
+    name: 'Classic Denim Jacket',
+    description: 'Timeless denim jacket with comfortable fit and durable construction.',
+    price: 89.99,
+    category: 'clothes',
+    image: 'https://images.unsplash.com/photo-1544022613-e87ca75a784a?w=400&h=400&fit=crop',
+    colors: ['Blue', 'Black', 'White'],
+    sizes: ['XS', 'S', 'M', 'L', 'XL']
+  },
+  {
+    id: '10',
+    name: 'Premium Cotton T-Shirt',
+    description: 'Soft and breathable cotton t-shirt with modern fit and comfortable feel.',
+    price: 29.99,
+    category: 'clothes',
+    image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=400&fit=crop',
+    colors: ['White', 'Black', 'Gray', 'Navy'],
+    sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL']
+  },
+  {
+    id: '11',
+    name: 'Stylish Sneakers',
+    description: 'Comfortable and trendy sneakers perfect for everyday wear.',
+    price: 79.99,
+    category: 'clothes',
+    image: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=400&h=400&fit=crop',
+    colors: ['White', 'Black', 'Gray'],
+    sizes: ['7', '8', '9', '10', '11', '12']
   }
 ]; 

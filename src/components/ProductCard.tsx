@@ -207,7 +207,7 @@ const CloseButton = styled.button`
 
 const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
   const [show3D, setShow3D] = useState(false);
-  const [rating] = useState(Math.floor(Math.random() * 2) + 4); // Random rating between 4-5
+  const [rating] = useState(Math.floor(Math.random() * 2) + 4);
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.stopPropagation();
