@@ -1,7 +1,9 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, Environment, useGLTF } from '@react-three/drei';
+import { FBXLoader } from 'three-stdlib';
+import * as THREE from 'three';
 import { Product } from '../types';
 
 interface Product3DViewerProps {
@@ -11,8 +13,8 @@ interface Product3DViewerProps {
 const ViewerContainer = styled.div`
   width: 100%;
   height: 600px;
-  position: relative;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  position: relative ;
+  background: linear-gradient(135deg, #fefefe 0%, #fef8f5 100%);
 `;
 
 const Controls = styled.div`
@@ -68,16 +70,58 @@ const ProductDescription = styled.p`
   line-height: 1.4;
 `;
 
-// Simple 3D model component - in a real app, you'd load actual 3D models
+// FBX Model component for the first product
+const CupModel: React.FC = () => {
+  const meshRef = useRef<THREE.Group>(null);
+  const [model, setModel] = useState<THREE.Group | null>(null);
+
+  useEffect(() => {
+    const loader = new FBXLoader();
+    loader.load('/models/Cup1 model.fbx', (object) => {
+      // Scale and position the model appropriately
+      object.scale.set(0.01, 0.01, 0.01);
+      object.position.set(0, 2, 0); // Move up slightly
+      
+      // Preserve original materials and lighting
+      object.traverse((child) => {
+        if (child instanceof THREE.Mesh) {
+          // Keep original materials if they exist
+          if (child.material) {
+            child.material.needsUpdate = true;
+            // Ensure materials are not too dark
+            if (child.material.color) {
+              child.material.color.multiplyScalar(1.2); // Brighten slightly
+            }
+          }
+        }
+      });
+      
+      setModel(object);
+    });
+  }, []);
+
+  if (!model) {
+    return (
+      <mesh position={[0, 0, 0]}>
+        <cylinderGeometry args={[0.5, 0.5, 1.5, 8]} />
+        <meshStandardMaterial color="#EFC0C2" metalness={0.3} roughness={0.5} />
+      </mesh>
+    );
+  }
+
+  return (
+    <primitive 
+      ref={meshRef} 
+      object={model} 
+      position={[0, -1.5, 0]} 
+      scale={[0.01, 0.01, 0.01]}
+    />
+  );
+};
+
+// Simple 3D model component for other products
 const ProductModel: React.FC<{ product: Product }> = ({ product }) => {
   const meshRef = useRef<THREE.Mesh>(null);
-  const [rotation, setRotation] = useState({ x: 0, y: 0, z: 0 });
-
-  useFrame((state) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.y += 0.01;
-    }
-  });
 
   // Generate different 3D shapes based on product category
   const getModelGeometry = () => {
@@ -98,7 +142,7 @@ const ProductModel: React.FC<{ product: Product }> = ({ product }) => {
       case 'furniture':
         return <meshStandardMaterial color="#8b4513" metalness={0.1} roughness={0.8} />;
       default:
-        return <meshStandardMaterial color="#667eea" metalness={0.3} roughness={0.5} />;
+        return <meshStandardMaterial color="#EFC0C2" metalness={0.3} roughness={0.5} />;
     }
   };
 
@@ -111,7 +155,7 @@ const ProductModel: React.FC<{ product: Product }> = ({ product }) => {
 };
 
 const Product3DViewer: React.FC<Product3DViewerProps> = ({ product }) => {
-  const [autoRotate, setAutoRotate] = useState(true);
+  const [autoRotate, setAutoRotate] = useState(false);
 
   const handleResetView = () => {
     // Reset camera position
@@ -125,6 +169,9 @@ const Product3DViewer: React.FC<Product3DViewerProps> = ({ product }) => {
     setAutoRotate(!autoRotate);
   };
 
+  // Check if this is the first product (Cup1 model)
+  const isFirstProduct = product.id === '1';
+
   return (
     <ViewerContainer>
       <ProductInfo>
@@ -133,11 +180,36 @@ const Product3DViewer: React.FC<Product3DViewerProps> = ({ product }) => {
       </ProductInfo>
 
       <Canvas camera={{ position: [0, 0, 5], fov: 50 }}>
-        <ambientLight intensity={0.5} />
-        <pointLight position={[10, 10, 10]} />
-        <pointLight position={[-10, -10, -10]} intensity={0.5} />
+        {/* Enhanced lighting setup for better model visibility */}
+        <ambientLight intensity={0.8} />
+        <directionalLight 
+          position={[5, 5, 5]} 
+          intensity={1.2} 
+          castShadow 
+          shadow-mapSize-width={2048}
+          shadow-mapSize-height={2048}
+        />
+        <directionalLight 
+          position={[-5, 5, -5]} 
+          intensity={0.8} 
+          color="#ffffff"
+        />
+        <pointLight 
+          position={[0, 10, 0]} 
+          intensity={0.5} 
+          color="#ffffff"
+        />
+        <pointLight 
+          position={[0, -10, 0]} 
+          intensity={0.3} 
+          color="#ffffff"
+        />
         
-        <ProductModel product={product} />
+        {isFirstProduct ? (
+          <CupModel />
+        ) : (
+          <ProductModel product={product} />
+        )}
         
         <OrbitControls 
           enablePan={true}
@@ -147,7 +219,8 @@ const Product3DViewer: React.FC<Product3DViewerProps> = ({ product }) => {
           autoRotateSpeed={2}
         />
         
-        <Environment preset="studio" />
+        {/* Use a brighter environment preset */}
+        <Environment preset="sunset" />
       </Canvas>
 
       <Controls>

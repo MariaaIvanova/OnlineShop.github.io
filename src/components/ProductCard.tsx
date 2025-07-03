@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { ShoppingCart, Eye, Star, X } from 'lucide-react';
 import { Product } from '../types';
-import Product3DViewer from '../components/Product3DViewer';
+import Product3DViewer from './Product3DViewer';
 
 interface ProductCardProps {
   product: Product;
@@ -28,7 +28,7 @@ const ImageContainer = styled.div`
   position: relative;
   height: 250px;
   overflow: hidden;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  background: linear-gradient(135deg, #fefefe 0%, #fef8f5 100%);
 `;
 
 const ProductImage = styled.img`
@@ -89,7 +89,7 @@ const ProductDescription = styled.p`
 const Price = styled.div`
   font-size: 1.5rem;
   font-weight: 700;
-  color: #667eea;
+  color: #EFC0C2;
   margin-bottom: 1rem;
 `;
 
@@ -122,7 +122,7 @@ const ActionButtons = styled.div`
 
 const AddToCartButton = styled.button`
   flex: 1;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #EFC0C2 0%, #d4a5a7 100%);
   color: white;
   border: none;
   padding: 0.75rem;
@@ -137,14 +137,14 @@ const AddToCartButton = styled.button`
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 5px 15px rgba(239, 192, 194, 0.3);
   }
 `;
 
 const View3DButtonLarge = styled.button`
-  background: rgba(102, 126, 234, 0.1);
-  color: #667eea;
-  border: 2px solid #667eea;
+  background: rgba(239, 192, 194, 0.1);
+  color: #EFC0C2;
+  border: 2px solid #EFC0C2;
   padding: 0.75rem;
   border-radius: 10px;
   font-weight: 600;
@@ -156,7 +156,7 @@ const View3DButtonLarge = styled.button`
   gap: 0.5rem;
 
   &:hover {
-    background: #667eea;
+    background: #EFC0C2;
     color: white;
   }
 `;
@@ -279,4 +279,4 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
   );
 };
 
-export default ProductCard; 
+export default ProductCard;

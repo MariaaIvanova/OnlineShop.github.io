@@ -101,7 +101,7 @@ const ItemName = styled.h4`
 const ItemPrice = styled.p`
   font-size: 1.1rem;
   font-weight: 600;
-  color: #667eea;
+  color: #EFC0C2;
 `;
 
 const RemoveButton = styled.button`
@@ -152,7 +152,7 @@ const CartTotal = styled.div`
 
 const CheckoutButton = styled.button`
   width: 100%;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #EFC0C2 0%, #d4a5a7 100%);
   color: white;
   border: none;
   padding: 1rem;
@@ -164,7 +164,7 @@ const CheckoutButton = styled.button`
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 5px 15px rgba(239, 192, 194, 0.3);
   }
 
   &:disabled {
@@ -178,8 +178,8 @@ const CheckoutButton = styled.button`
 const ClearCartButton = styled.button`
   width: 100%;
   background: none;
-  color: #ff4757;
-  border: 2px solid #ff4757;
+  color: #EFC0C2;
+  border: 2px solid #EFC0C2;
   padding: 0.75rem;
   border-radius: 10px;
   font-weight: 600;
@@ -188,7 +188,7 @@ const ClearCartButton = styled.button`
   margin-top: 0.5rem;
 
   &:hover {
-    background: #ff4757;
+    background: #EFC0C2;
     color: white;
   }
 `;

@@ -26,7 +26,7 @@ const HeaderContainer = styled.header`
 const Logo = styled.h1`
   font-size: 1.8rem;
   font-weight: 700;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #EFC0C2 0%, #d4a5a7 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -49,7 +49,7 @@ const NavLink = styled.a`
   transition: color 0.3s ease;
 
   &:hover {
-    color: #667eea;
+    color: #EFC0C2;
   }
 `;
 
@@ -63,7 +63,7 @@ const CartButton = styled.button`
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: rgba(102, 126, 234, 0.1);
+    background-color: rgba(239, 192, 194, 0.1);
   }
 `;
 
@@ -71,7 +71,7 @@ const CartBadge = styled.span`
   position: absolute;
   top: -5px;
   right: -5px;
-  background: #ff4757;
+      background: #EFC0C2;
   color: white;
   border-radius: 50%;
   width: 20px;

@@ -3,8 +3,8 @@ import { Product } from '../types';
 export const products: Product[] = [
   {
     id: '1',
-    name: 'Modern Wireless Headphones',
-    description: 'Premium wireless headphones with noise cancellation and immersive 3D audio experience.',
+    name: 'Cutie Patootie cup',
+    description: 'Premium cutie patootie cup with super sweet cherry on it.',
     price: 299.99,
     category: 'electronics',
     image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=400&fit=crop',

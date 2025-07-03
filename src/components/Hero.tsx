@@ -23,7 +23,7 @@ const HeroTitle = styled(motion.h1)`
   font-size: clamp(2.5rem, 8vw, 4.5rem);
   font-weight: 700;
   margin-bottom: 1.5rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #EFC0C2 0%, #d4a5a7 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -41,7 +41,7 @@ const HeroSubtitle = styled(motion.p)`
 `;
 
 const CTAButton = styled(motion.button)`
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #EFC0C2 0%, #d4a5a7 100%);
   color: white;
   border: none;
   padding: 1rem 2rem;
@@ -56,7 +56,7 @@ const CTAButton = styled(motion.button)`
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 10px 30px rgba(239, 192, 194, 0.3);
   }
 `;
 
@@ -77,7 +77,7 @@ const FloatingElement = styled(motion.div)`
   position: absolute;
   width: 100px;
   height: 100px;
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+  background: linear-gradient(135deg, rgba(239, 192, 194, 0.1) 0%, rgba(212, 165, 167, 0.1) 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -104,7 +104,7 @@ const Hero: React.FC = () => {
           ease: "easeInOut"
         }}
       >
-        <Sparkles size={24} color="#667eea" />
+        <Sparkles size={24} color="#EFC0C2" />
       </FloatingElement>
 
       <FloatingElement
@@ -119,7 +119,7 @@ const Hero: React.FC = () => {
           ease: "easeInOut"
         }}
       >
-        <Sparkles size={20} color="#764ba2" />
+        <Sparkles size={20} color="#d4a5a7" />
       </FloatingElement>
 
       <HeroContent>
@@ -130,7 +130,7 @@ const Hero: React.FC = () => {
         >
           Discover Products in
           <br />
-          <span style={{ color: '#667eea' }}>3D Reality</span>
+          <span style={{ color: '#EFC0C2' }}>3D Reality</span>
         </HeroTitle>
 
         <HeroSubtitle

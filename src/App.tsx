@@ -8,7 +8,7 @@ import { Product } from './types';
 
 const AppContainer = styled.div`
   min-height: 100vh;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  background: linear-gradient(135deg, #fefefe 0%, #fef8f5 100%);
 `;
 
 const MainContent = styled.main`

@@ -21,7 +21,7 @@ const SectionTitle = styled.h2`
   font-size: 2.5rem;
   font-weight: 700;
   margin-bottom: 1rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #EFC0C2 0%, #d4a5a7 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -47,8 +47,8 @@ const FilterContainer = styled.div`
 
 const FilterButton = styled.button<{ active: boolean }>`
   padding: 0.5rem 1.5rem;
-  border: 2px solid ${props => props.active ? '#667eea' : '#e1e5e9'};
-  background: ${props => props.active ? '#667eea' : 'transparent'};
+  border: 2px solid ${props => props.active ? '#EFC0C2' : '#e1e5e9'};
+  background: ${props => props.active ? '#EFC0C2' : 'transparent'};
   color: ${props => props.active ? 'white' : '#333'};
   border-radius: 25px;
   cursor: pointer;
@@ -56,8 +56,8 @@ const FilterButton = styled.button<{ active: boolean }>`
   transition: all 0.3s ease;
 
   &:hover {
-    border-color: #667eea;
-    background: ${props => props.active ? '#667eea' : 'rgba(102, 126, 234, 0.1)'};
+    border-color: #EFC0C2;
+    background: ${props => props.active ? '#EFC0C2' : 'rgba(239, 192, 194, 0.1)'};
   }
 `;
 
