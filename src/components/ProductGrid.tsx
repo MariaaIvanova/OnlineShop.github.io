@@ -8,6 +8,7 @@ import { products } from '../data/products';
 
 interface ProductGridProps {
   onAddToCart: (product: Product) => void;
+  onLoginRequired: () => void;
 }
 
 const ProductSection = styled.section`
@@ -68,7 +69,7 @@ const ProductGridContainer = styled.div`
   margin-top: 2rem;
 `;
 
-const ProductGrid: React.FC<ProductGridProps> = ({ onAddToCart }) => {
+const ProductGrid: React.FC<ProductGridProps> = ({ onAddToCart, onLoginRequired }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [sortBy, setSortBy] = useState<string>('featured');
 
@@ -154,6 +155,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ onAddToCart }) => {
             <ProductCard
               product={product}
               onAddToCart={onAddToCart}
+              onLoginRequired={onLoginRequired}
             />
           </motion.div>
         ))}

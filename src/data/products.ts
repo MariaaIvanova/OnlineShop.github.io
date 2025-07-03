@@ -17,29 +17,29 @@ export const products: Product[] = [
     description: 'Comfortable and stylish Cutie Patootie t-shirt designed for literal divas.',
     price: 20.99,
     category: 'clothes',
-    image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=400&fit=crop',
+    image: '/models/Basic Tee1 Preview.png',
     colors: ['Gray', 'Black', 'Brown'],
-    sizes: ['Standard']
+    sizes: ['XS', 'S', 'M', 'L', 'XL']
   },
   {
     id: '3',
-    name: 'Smart Fitness Watch',
-    description: 'Advanced fitness tracking with heart rate monitoring, GPS, and 7-day battery life.',
-    price: 199.99,
-    category: 'electronics',
-    image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=400&fit=crop',
+    name: 'Girlyboss t-shirt',
+    description: 'Another fabulous t-shirt for the ultimate diva vibes and girlboss energy.',
+    price: 20.99,
+    category: 'clothes',
+    image: '/models/Basic Tee2 Preview.png',
     colors: ['Silver', 'Black', 'Rose Gold'],
-    sizes: ['38mm', '42mm']
+    sizes: ['XS', 'S', 'M', 'L', 'XL']
   },
   {
     id: '4',
-    name: 'Minimalist Coffee Table',
-    description: 'Clean and modern coffee table with hidden storage compartment and premium wood finish.',
-    price: 399.99,
-    category: 'furniture',
-    image: 'https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc?w=400&h=400&fit=crop',
+    name: 'Girlypop t-shirt',
+    description: 'The iconic girlypop t-shirt for the queen who slays every day.',
+    price: 20.99,
+    category: 'clothes',
+    image: '/models/Basic Tee3 Preview.png',
     colors: ['Oak', 'Walnut', 'White'],
-    sizes: ['120cm x 60cm']
+    sizes: ['XS', 'S', 'M', 'L', 'XL']
   },
   {
     id: '5',

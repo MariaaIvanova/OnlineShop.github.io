@@ -4,6 +4,8 @@ import Header from './components/Header';
 import Hero from './components/Hero';
 import ProductGrid from './components/ProductGrid';
 import Cart from './components/Cart';
+import LoginModal from './components/LoginModal';
+import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { Product } from './types';
 
 const AppContainer = styled.div`
@@ -15,9 +17,10 @@ const MainContent = styled.main`
   padding-top: 80px;
 `;
 
-const App: React.FC = () => {
+const AppContent: React.FC = () => {
   const [cartItems, setCartItems] = useState<Product[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
 
   const addToCart = (product: Product) => {
     setCartItems(prev => [...prev, product]);
@@ -31,15 +34,27 @@ const App: React.FC = () => {
     setCartItems([]);
   };
 
+  const handleLoginRequired = () => {
+    setIsLoginModalOpen(true);
+  };
+
+  const handleLoginSuccess = () => {
+    setIsLoginModalOpen(false);
+  };
+
   return (
     <AppContainer>
       <Header 
         cartItemCount={cartItems.length}
         onCartClick={() => setIsCartOpen(true)}
+        onLoginClick={() => setIsLoginModalOpen(true)}
       />
       <MainContent>
         <Hero />
-        <ProductGrid onAddToCart={addToCart} />
+        <ProductGrid 
+          onAddToCart={addToCart} 
+          onLoginRequired={handleLoginRequired}
+        />
       </MainContent>
       <Cart 
         isOpen={isCartOpen}
@@ -48,7 +63,20 @@ const App: React.FC = () => {
         onRemoveItem={removeFromCart}
         onClearCart={clearCart}
       />
+      <LoginModal 
+        isOpen={isLoginModalOpen}
+        onClose={() => setIsLoginModalOpen(false)}
+        onSuccess={handleLoginSuccess}
+      />
     </AppContainer>
+  );
+};
+
+const App: React.FC = () => {
+  return (
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
   );
 };
 

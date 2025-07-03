@@ -120,7 +120,7 @@ const TShirtModel: React.FC = () => {
 
   useEffect(() => {
     const loader = new FBXLoader();
-    loader.load('/models/Basic Tee1 Model.fbx', (object) => {
+    loader.load('/models/maniken/Basic Tee1 Manequeen_Model.fbx', (object) => {
       object.scale.set(0.01, 0.01, 0.01);
       object.position.set(0, 2, 0);
       
@@ -144,6 +144,94 @@ const TShirtModel: React.FC = () => {
       <mesh position={[0, 0, 0]}>
         <boxGeometry args={[1, 1.5, 0.1]} />
         <meshStandardMaterial color="#4a90e2" metalness={0.1} roughness={0.8} />
+      </mesh>
+    );
+  }
+
+  return (
+    <primitive 
+      ref={meshRef} 
+      object={model} 
+      position={[0, -1.5, 0]} 
+      scale={[0.01, 0.01, 0.01]}
+    />
+  );
+};
+
+const TShirt2Model: React.FC = () => {
+  const meshRef = useRef<THREE.Group>(null);
+  const [model, setModel] = useState<THREE.Group | null>(null);
+
+  useEffect(() => {
+    const loader = new FBXLoader();
+    loader.load('public/models/maniken/Basic Tee3 Manequeen_Model.fbx', (object) => {
+      object.scale.set(0.01, 0.01, 0.01);
+      object.position.set(0, 2, 0);
+      
+      object.traverse((child) => {
+        if (child instanceof THREE.Mesh) {
+          if (child.material) {
+            child.material.needsUpdate = true;
+            if (child.material.color) {
+              child.material.color.multiplyScalar(1.2);
+            }
+          }
+        }
+      });
+      
+      setModel(object);
+    });
+  }, []);
+
+  if (!model) {
+    return (
+      <mesh position={[0, 0, 0]}>
+        <boxGeometry args={[1, 1.5, 0.1]} />
+        <meshStandardMaterial color="#e74c3c" metalness={0.1} roughness={0.8} />
+      </mesh>
+    );
+  }
+
+  return (
+    <primitive 
+      ref={meshRef} 
+      object={model} 
+      position={[0, -1.5, 0]} 
+      scale={[0.01, 0.01, 0.01]}
+    />
+  );
+};
+
+const TShirt3Model: React.FC = () => {
+  const meshRef = useRef<THREE.Group>(null);
+  const [model, setModel] = useState<THREE.Group | null>(null);
+
+  useEffect(() => {
+    const loader = new FBXLoader();
+    loader.load('/models/catalog/Basic Tee3 Catalog_Model.fbx', (object) => {
+      object.scale.set(0.01, 0.01, 0.01);
+      object.position.set(0, 2, 0);
+      
+      object.traverse((child) => {
+        if (child instanceof THREE.Mesh) {
+          if (child.material) {
+            child.material.needsUpdate = true;
+            if (child.material.color) {
+              child.material.color.multiplyScalar(1.2);
+            }
+          }
+        }
+      });
+      
+      setModel(object);
+    });
+  }, []);
+
+  if (!model) {
+    return (
+      <mesh position={[0, 0, 0]}>
+        <boxGeometry args={[1, 1.5, 0.1]} />
+        <meshStandardMaterial color="#27ae60" metalness={0.1} roughness={0.8} />
       </mesh>
     );
   }
@@ -206,6 +294,8 @@ const Product3DViewer: React.FC<Product3DViewerProps> = ({ product }) => {
 
   const isFirstProduct = product.id === '1';
   const isSecondProduct = product.id === '2';
+  const isThirdProduct = product.id === '3';
+  const isFourthProduct = product.id === '4';
 
   return (
     <ViewerContainer>
@@ -243,6 +333,10 @@ const Product3DViewer: React.FC<Product3DViewerProps> = ({ product }) => {
           <CupModel />
         ) : isSecondProduct ? (
           <TShirtModel />
+        ) : isThirdProduct ? (
+          <TShirt2Model />
+        ) : isFourthProduct ? (
+          <TShirt3Model />
         ) : (
           <ProductModel product={product} />
         )}

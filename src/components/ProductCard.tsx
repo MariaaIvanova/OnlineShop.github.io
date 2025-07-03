@@ -3,11 +3,13 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { ShoppingCart, Eye, Star, X } from 'lucide-react';
 import { Product } from '../types';
+import { useAuth } from '../contexts/AuthContext';
 import Product3DViewer from './Product3DViewer';
 
 interface ProductCardProps {
   product: Product;
   onAddToCart: (product: Product) => void;
+  onLoginRequired: () => void;
 }
 
 const Card = styled(motion.div)`
@@ -205,13 +207,18 @@ const CloseButton = styled.button`
   }
 `;
 
-const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onLoginRequired }) => {
   const [show3D, setShow3D] = useState(false);
   const [rating] = useState(Math.floor(Math.random() * 2) + 4);
+  const { isAuthenticated } = useAuth();
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.stopPropagation();
-    onAddToCart(product);
+    if (isAuthenticated) {
+      onAddToCart(product);
+    } else {
+      onLoginRequired();
+    }
   };
 
   const handleView3D = (e: React.MouseEvent) => {
