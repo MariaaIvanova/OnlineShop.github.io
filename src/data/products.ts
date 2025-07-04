@@ -8,6 +8,7 @@ export const products: Product[] = [
     price: 24.99,
     category: 'furniture',
     image: '/models/cup1.png',
+    modelPath: '/models/Cup1 model.fbx',
     colors: ['Black', 'White', 'Blue'],
     sizes: ['One Size']
   },
@@ -18,6 +19,7 @@ export const products: Product[] = [
     price: 20.99,
     category: 'clothes',
     image: '/models/Basic Tee1 Preview.png',
+    modelPath: '/models/catalog/Basic Tee1 Catalog_Model.fbx',
     colors: ['Gray', 'Black', 'Brown'],
     sizes: ['XS', 'S', 'M', 'L', 'XL']
   },
@@ -28,6 +30,7 @@ export const products: Product[] = [
     price: 20.99,
     category: 'clothes',
     image: '/models/Basic Tee2 Preview.png',
+    modelPath: '/models/catalog/Basic Tee2 Catalog_Model.fbx',
     colors: ['Silver', 'Black', 'Rose Gold'],
     sizes: ['XS', 'S', 'M', 'L', 'XL']
   },
@@ -38,6 +41,7 @@ export const products: Product[] = [
     price: 20.99,
     category: 'clothes',
     image: '/models/Basic Tee3 Preview.png',
+    modelPath: '/models/catalog/Basic Tee3 Catalog_Model.fbx',
     colors: ['Oak', 'Walnut', 'White'],
     sizes: ['XS', 'S', 'M', 'L', 'XL']
   },
