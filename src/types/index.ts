@@ -9,6 +9,7 @@ export interface Product {
   colors?: string[];
   sizes?: string[];
   modelPath?: string;
+  mannequinPath?: string;
 }
 
 export interface CartItem extends Product {

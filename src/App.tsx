@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import ProductGrid from './components/ProductGrid';
+import About from './components/About';
+import Contact from './components/Contact';
 import Cart from './components/Cart';
 import LoginModal from './components/LoginModal';
 import MannequinStyler from './components/MannequinStyler';
@@ -74,6 +76,8 @@ const HomePage: React.FC = () => {
           onAddToCart={addToCart} 
           onLoginRequired={handleLoginRequired}
         />
+        <About />
+        <Contact />
       </MainContent>
       <Cart 
         isOpen={isCartOpen}

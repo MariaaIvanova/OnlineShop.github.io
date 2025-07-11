@@ -152,8 +152,8 @@ const TShirtModel: React.FC = () => {
     <primitive 
       ref={meshRef} 
       object={model} 
-      position={[0, -1.5, 2]} 
-      scale={[0.008, 0.008, 0.008]}
+      position={[0, -0.5, -2]} 
+      scale={[0.004, 0.004, 0.004]}
     />
   );
 };
@@ -196,8 +196,8 @@ const TShirt2Model: React.FC = () => {
     <primitive 
       ref={meshRef} 
       object={model} 
-      position={[0, -1.5, 0]} 
-      scale={[0.01, 0.01, 0.01]}
+      position={[0, -0.5, -2]} 
+      scale={[0.004, 0.004, 0.004]}
     />
   );
 };
@@ -240,8 +240,8 @@ const TShirt3Model: React.FC = () => {
     <primitive 
       ref={meshRef} 
       object={model} 
-      position={[0, -1.5, 0]} 
-      scale={[0.01, 0.01, 0.01]}
+      position={[0, -0.5, -2]} 
+      scale={[0.004, 0.004, 0.004]}
     />
   );
 };
@@ -284,8 +284,140 @@ const HatModel: React.FC = () => {
     <primitive 
       ref={meshRef} 
       object={model} 
-      position={[0, -1.5, 0]} 
-      scale={[0.01, 0.01, 0.01]}
+      position={[0, -0.5, -2]} 
+      scale={[0.004, 0.004, 0.004]}
+    />
+  );
+};
+
+const SombreroModel: React.FC = () => {
+  const meshRef = useRef<THREE.Group>(null);
+  const [model, setModel] = useState<THREE.Group | null>(null);
+
+  useEffect(() => {
+    const loader = new FBXLoader();
+    loader.load('/models/Sombrero Catalog_Model.fbx', (object) => {
+      object.scale.set(0.01, 0.01, 0.01);
+      object.position.set(0, 2, 0);
+      
+      object.traverse((child) => {
+        if (child instanceof THREE.Mesh) {
+          if (child.material) {
+            child.material.needsUpdate = true;
+            if (child.material.color) {
+              child.material.color.multiplyScalar(1.2);
+            }
+          }
+        }
+      });
+      
+      setModel(object);
+    });
+  }, []);
+
+  if (!model) {
+    return (
+      <mesh position={[0, 0, 0]}>
+        <cylinderGeometry args={[1.2, 1.2, 0.4, 8]} />
+        <meshStandardMaterial color="#8B4513" metalness={0.1} roughness={0.8} />
+      </mesh>
+    );
+  }
+
+  return (
+    <primitive 
+      ref={meshRef} 
+      object={model} 
+      position={[0, -0.5, -2]} 
+      scale={[0.004, 0.004, 0.004]}
+    />
+  );
+};
+
+const TableModel: React.FC = () => {
+  const meshRef = useRef<THREE.Group>(null);
+  const [model, setModel] = useState<THREE.Group | null>(null);
+
+  useEffect(() => {
+    const loader = new FBXLoader();
+    loader.load('/models/Table Model.fbx', (object) => {
+      object.scale.set(0.01, 0.01, 0.01);
+      object.position.set(0, 2, 0);
+      
+      object.traverse((child) => {
+        if (child instanceof THREE.Mesh) {
+          if (child.material) {
+            child.material.needsUpdate = true;
+            if (child.material.color) {
+              child.material.color.multiplyScalar(1.2);
+            }
+          }
+        }
+      });
+      
+      setModel(object);
+    });
+  }, []);
+
+  if (!model) {
+    return (
+      <mesh position={[0, 0, 0]}>
+        <boxGeometry args={[2, 0.1, 1]} />
+        <meshStandardMaterial color="#8B4513" metalness={0.1} roughness={0.8} />
+      </mesh>
+    );
+  }
+
+  return (
+    <primitive 
+      ref={meshRef} 
+      object={model} 
+      position={[0, -0.5, -2]} 
+      scale={[0.004, 0.004, 0.004]}
+    />
+  );
+};
+
+const IphoneCaseModel: React.FC = () => {
+  const meshRef = useRef<THREE.Group>(null);
+  const [model, setModel] = useState<THREE.Group | null>(null);
+
+  useEffect(() => {
+    const loader = new FBXLoader();
+    loader.load('/models/Iphone Case Model.fbx', (object) => {
+      object.scale.set(0.01, 0.01, 0.01);
+      object.position.set(0, 2, 0);
+      
+      object.traverse((child) => {
+        if (child instanceof THREE.Mesh) {
+          if (child.material) {
+            child.material.needsUpdate = true;
+            if (child.material.color) {
+              child.material.color.multiplyScalar(1.2);
+            }
+          }
+        }
+      });
+      
+      setModel(object);
+    });
+  }, []);
+
+  if (!model) {
+    return (
+      <mesh position={[0, 0, 0]}>
+        <boxGeometry args={[0.8, 0.1, 1.6]} />
+        <meshStandardMaterial color="#2c3e50" metalness={0.3} roughness={0.7} />
+      </mesh>
+    );
+  }
+
+  return (
+    <primitive 
+      ref={meshRef} 
+      object={model} 
+      position={[0, -0.5, -2]} 
+      scale={[0.02, 0.02, 0.02]}
     />
   );
 };
@@ -341,6 +473,9 @@ const Product3DViewer: React.FC<Product3DViewerProps> = ({ product }) => {
   const isThirdProduct = product.id === '3';
   const isFourthProduct = product.id === '4';
   const isFifthProduct = product.id === '5';
+  const isSixthProduct = product.id === '6';
+  const isSeventhProduct = product.id === '7';
+  const isEighthProduct = product.id === '8';
 
   return (
     <ViewerContainer>
@@ -384,6 +519,12 @@ const Product3DViewer: React.FC<Product3DViewerProps> = ({ product }) => {
           <TShirt3Model />
         ) : isFifthProduct ? (
           <HatModel />
+        ) : isSixthProduct ? (
+          <SombreroModel />
+        ) : isSeventhProduct ? (
+          <TableModel />
+        ) : isEighthProduct ? (
+          <IphoneCaseModel />
         ) : (
           <ProductModel product={product} />
         )}

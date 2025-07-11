@@ -51,79 +51,44 @@ export const products: Product[] = [
     description: 'A trendy and fashionable cap perfect for any outfit and occasion.',
     price: 15.99,
     category: 'clothes',
-    image: '/models/cup1.png', // Using cup image as placeholder - you may want to add a hat preview image
+    image: '/models/Cappa Preview Image.png',
     modelPath: '/models/Cappa Catalog_Model.fbx',
     colors: ['Black', 'White', 'Navy', 'Red'],
     sizes: ['One Size']
   },
   {
     id: '6',
-    name: 'Portable Bluetooth Speaker',
-    description: 'Waterproof portable speaker with 360-degree sound and 20-hour battery life.',
-    price: 149.99,
-    category: 'electronics',
-    image: 'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=400&h=400&fit=crop',
-    colors: ['Black', 'Blue', 'Red'],
+    name: 'Stylish Sombrero',
+    description: 'A beautiful and traditional sombrero hat perfect for any occasion.',
+    price: 25.99,
+    category: 'clothes',
+    image: '/models/Sombrero Preview Image.png',
+    modelPath: '/models/Sombrero Catalog_Model.fbx',
+    mannequinPath: '/models/Sombrero Manequeen_Model.fbx',
+    colors: ['Brown', 'Black', 'Beige'],
     sizes: ['One Size']
   },
   {
     id: '7',
-    name: 'Designer Floor Lamp',
-    description: 'Contemporary floor lamp with adjustable head and touch-sensitive controls.',
-    price: 249.99,
+    name: 'Elegant Table',
+    description: 'A beautiful and elegant table perfect for any home or office setting.',
+    price: 299.99,
     category: 'furniture',
-    image: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=400&h=400&fit=crop',
-    colors: ['Brass', 'Black', 'White'],
-    sizes: ['150cm Height']
-  },
-  {
-    id: '8',
-    name: '4K Action Camera',
-    description: 'Ultra-compact 4K camera perfect for capturing adventures with image stabilization.',
-    price: 349.99,
-    category: 'electronics',
-    image: 'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=400&h=400&fit=crop',
-    colors: ['Black', 'Silver'],
-    sizes: ['One Size']
-  },
-  {
-    id: '9',
-    name: 'Accent Armchair',
-    description: 'Comfortable accent chair with premium fabric upholstery and solid wood frame.',
-    price: 449.99,
-    category: 'furniture',
-    image: 'https://images.unsplash.com/photo-1567538096630-e0c55bd6374c?w=400&h=400&fit=crop',
-    colors: ['Navy', 'Gray', 'Beige'],
+    image: '/models/Table Preview Image.png',
+    modelPath: '/models/Table Model.fbx',
+    colors: ['Brown', 'Black', 'White'],
     sizes: ['Standard']
   },
   {
-    id: '10',
-    name: 'Classic Denim Jacket',
-    description: 'Timeless denim jacket with comfortable fit and durable construction.',
-    price: 89.99,
-    category: 'clothes',
-    image: 'https://images.unsplash.com/photo-1544022613-e87ca75a784a?w=400&h=400&fit=crop',
-    colors: ['Blue', 'Black', 'White'],
-    sizes: ['XS', 'S', 'M', 'L', 'XL']
+    id: '8',
+    name: 'iPhone Case',
+    description: 'A stylish and protective iPhone case with premium design.',
+    price: 39.99,
+    category: 'electronics',
+    image: '/models/Iphone Case Preview.png',
+    modelPath: '/models/Iphone Case Model.fbx',
+    colors: ['Black', 'White', 'Blue', 'Pink'],
+    sizes: ['iPhone 14', 'iPhone 15', 'iPhone 15 Pro']
   },
-  {
-    id: '11',
-    name: 'Premium Cotton T-Shirt',
-    description: 'Soft and breathable cotton t-shirt with modern fit and comfortable feel.',
-    price: 29.99,
-    category: 'clothes',
-    image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=400&fit=crop',
-    colors: ['White', 'Black', 'Gray', 'Navy'],
-    sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL']
-  },
-  {
-    id: '12',
-    name: 'Stylish Sneakers',
-    description: 'Comfortable and trendy sneakers perfect for everyday wear.',
-    price: 79.99,
-    category: 'clothes',
-    image: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=400&h=400&fit=crop',
-    colors: ['White', 'Black', 'Gray'],
-    sizes: ['7', '8', '9', '10', '11', '12']
-  }
+
 ]; 
