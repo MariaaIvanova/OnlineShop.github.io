@@ -120,7 +120,7 @@ const TShirtModel: React.FC = () => {
 
   useEffect(() => {
     const loader = new FBXLoader();
-    loader.load('/models/maniken/Basic Tee1 Manequeen_Model.fbx', (object) => {
+    loader.load('public/models/catalog/Basic Tee1 Catalog_Model.fbx', (object) => {
       object.scale.set(0.01, 0.01, 0.01);
       object.position.set(0, 2, 0);
       
@@ -152,8 +152,8 @@ const TShirtModel: React.FC = () => {
     <primitive 
       ref={meshRef} 
       object={model} 
-      position={[0, -1.5, 0]} 
-      scale={[0.01, 0.01, 0.01]}
+      position={[0, -1.5, 2]} 
+      scale={[0.008, 0.008, 0.008]}
     />
   );
 };
@@ -164,7 +164,7 @@ const TShirt2Model: React.FC = () => {
 
   useEffect(() => {
     const loader = new FBXLoader();
-    loader.load('public/models/maniken/Basic Tee3 Manequeen_Model.fbx', (object) => {
+    loader.load('/models/catalog/Basic Tee2 Catalog_Model.fbx', (object) => {
       object.scale.set(0.01, 0.01, 0.01);
       object.position.set(0, 2, 0);
       
@@ -246,6 +246,50 @@ const TShirt3Model: React.FC = () => {
   );
 };
 
+const HatModel: React.FC = () => {
+  const meshRef = useRef<THREE.Group>(null);
+  const [model, setModel] = useState<THREE.Group | null>(null);
+
+  useEffect(() => {
+    const loader = new FBXLoader();
+    loader.load('/models/Cappa Catalog_Model.fbx', (object) => {
+      object.scale.set(0.01, 0.01, 0.01);
+      object.position.set(0, 2, 0);
+      
+      object.traverse((child) => {
+        if (child instanceof THREE.Mesh) {
+          if (child.material) {
+            child.material.needsUpdate = true;
+            if (child.material.color) {
+              child.material.color.multiplyScalar(1.2);
+            }
+          }
+        }
+      });
+      
+      setModel(object);
+    });
+  }, []);
+
+  if (!model) {
+    return (
+      <mesh position={[0, 0, 0]}>
+        <cylinderGeometry args={[0.8, 0.8, 0.3, 8]} />
+        <meshStandardMaterial color="#2c3e50" metalness={0.1} roughness={0.8} />
+      </mesh>
+    );
+  }
+
+  return (
+    <primitive 
+      ref={meshRef} 
+      object={model} 
+      position={[0, -1.5, 0]} 
+      scale={[0.01, 0.01, 0.01]}
+    />
+  );
+};
+
 const ProductModel: React.FC<{ product: Product }> = ({ product }) => {
   const meshRef = useRef<THREE.Mesh>(null);
 
@@ -296,6 +340,7 @@ const Product3DViewer: React.FC<Product3DViewerProps> = ({ product }) => {
   const isSecondProduct = product.id === '2';
   const isThirdProduct = product.id === '3';
   const isFourthProduct = product.id === '4';
+  const isFifthProduct = product.id === '5';
 
   return (
     <ViewerContainer>
@@ -337,6 +382,8 @@ const Product3DViewer: React.FC<Product3DViewerProps> = ({ product }) => {
           <TShirt2Model />
         ) : isFourthProduct ? (
           <TShirt3Model />
+        ) : isFifthProduct ? (
+          <HatModel />
         ) : (
           <ProductModel product={product} />
         )}

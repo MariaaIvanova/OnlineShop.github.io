@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { ShoppingCart, Menu, User, LogOut, Settings } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ShoppingCart, Menu, User, LogOut, Settings, Palette } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
+import SettingsModal from './SettingsModal';
 
 interface HeaderProps {
   cartItemCount: number;
@@ -52,6 +54,26 @@ const NavLink = styled.a`
 
   &:hover {
     color: #EFC0C2;
+  }
+`;
+
+const StylerButton = styled(Link)`
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    color: white;
   }
 `;
 
@@ -190,6 +212,7 @@ const UserContainer = styled.div`
 const Header: React.FC<HeaderProps> = ({ cartItemCount, onCartClick, onLoginClick }) => {
   const { user, isAuthenticated, logout } = useAuth();
   const [showUserDropdown, setShowUserDropdown] = useState(false);
+  const [showSettingsModal, setShowSettingsModal] = useState(false);
   const userDropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -214,6 +237,11 @@ const Header: React.FC<HeaderProps> = ({ cartItemCount, onCartClick, onLoginClic
     setShowUserDropdown(false);
   };
 
+  const handleSettingsClick = () => {
+    setShowSettingsModal(true);
+    setShowUserDropdown(false);
+  };
+
   return (
     <HeaderContainer>
       <Logo>3D Shop</Logo>
@@ -226,6 +254,11 @@ const Header: React.FC<HeaderProps> = ({ cartItemCount, onCartClick, onLoginClic
       </Nav>
 
       <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+        <StylerButton to="/styler">
+          <Palette size={16} />
+          3D Styler
+        </StylerButton>
+        
         <CartButton onClick={onCartClick}>
           <ShoppingCart size={24} />
           {cartItemCount > 0 && <CartBadge>{cartItemCount}</CartBadge>}
@@ -234,17 +267,17 @@ const Header: React.FC<HeaderProps> = ({ cartItemCount, onCartClick, onLoginClic
         {isAuthenticated ? (
           <UserContainer ref={userDropdownRef}>
             <UserButton onClick={handleUserClick}>
-              {user?.avatar ? (
-                <UserAvatar src={user.avatar} alt={user.name} />
+              {user?.profilePic ? (
+                <UserAvatar src={user.profilePic} alt={user.username} />
               ) : (
                 <User size={24} />
               )}
-              <UserName>{user?.name}</UserName>
+              <UserName>{user?.username}</UserName>
             </UserButton>
             
             {showUserDropdown && (
               <UserDropdown>
-                <DropdownItem onClick={() => setShowUserDropdown(false)}>
+                <DropdownItem onClick={handleSettingsClick}>
                   <Settings size={16} />
                   Settings
                 </DropdownItem>
@@ -266,6 +299,11 @@ const Header: React.FC<HeaderProps> = ({ cartItemCount, onCartClick, onLoginClic
           <Menu size={24} />
         </MobileMenuButton>
       </div>
+
+      <SettingsModal 
+        isOpen={showSettingsModal}
+        onClose={() => setShowSettingsModal(false)}
+      />
     </HeaderContainer>
   );
 };

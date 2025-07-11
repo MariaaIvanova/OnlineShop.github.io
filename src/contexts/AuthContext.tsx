@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { User, AuthState, LoginCredentials, SignupCredentials } from '../types';
+import { supabase } from '../lib/supabase';
 
 interface AuthContextType extends AuthState {
   login: (credentials: LoginCredentials) => Promise<boolean>;
@@ -22,22 +23,6 @@ interface AuthProviderProps {
   children: ReactNode;
 }
 
-// Mock user data for demonstration
-const mockUsers: User[] = [
-  {
-    id: '1',
-    name: 'John Doe',
-    email: 'john@example.com',
-    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face'
-  },
-  {
-    id: '2',
-    name: 'Jane Smith',
-    email: 'jane@example.com',
-    avatar: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face'
-  }
-];
-
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [authState, setAuthState] = useState<AuthState>({
     user: null,
@@ -47,46 +32,73 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   // Check for existing session on mount
   useEffect(() => {
-    const savedUser = localStorage.getItem('user');
-    if (savedUser) {
+    const checkUser = () => {
       try {
-        const user = JSON.parse(savedUser);
-        setAuthState({
-          user,
-          isAuthenticated: true,
-          isLoading: false
-        });
+        const savedSession = localStorage.getItem('user_session');
+        
+        if (savedSession) {
+          const userData = JSON.parse(savedSession);
+          setAuthState({
+            user: userData,
+            isAuthenticated: true,
+            isLoading: false
+          });
+        } else {
+          setAuthState({
+            user: null,
+            isAuthenticated: false,
+            isLoading: false
+          });
+        }
       } catch (error) {
-        localStorage.removeItem('user');
+        console.error('Error checking user session:', error);
+        localStorage.removeItem('user_session');
         setAuthState({
           user: null,
           isAuthenticated: false,
           isLoading: false
         });
       }
-    } else {
-      setAuthState(prev => ({ ...prev, isLoading: false }));
-    }
+    };
+
+    checkUser();
   }, []);
 
   const login = async (credentials: LoginCredentials): Promise<boolean> => {
     setAuthState(prev => ({ ...prev, isLoading: true }));
     
-    // Simulate API call delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    // Mock authentication logic
-    const user = mockUsers.find(u => u.email === credentials.email);
-    
-    if (user && credentials.password === 'password') { // Simple mock validation
+    try {
+      // Find the user by email in our users table
+      const { data: userData, error: userError } = await supabase
+        .from('users')
+        .select('*')
+        .eq('email', credentials.email)
+        .single();
+
+      if (userError || !userData) {
+        setAuthState(prev => ({ ...prev, isLoading: false }));
+        return false;
+      }
+
+      // Verify password
+      if (userData.password !== credentials.password) {
+        setAuthState(prev => ({ ...prev, isLoading: false }));
+        return false;
+      }
+
+      // Set authentication state directly (bypass Supabase Auth)
       setAuthState({
-        user,
+        user: userData,
         isAuthenticated: true,
         isLoading: false
       });
-      localStorage.setItem('user', JSON.stringify(user));
+
+      // Store session in localStorage for persistence
+      localStorage.setItem('user_session', JSON.stringify(userData));
+      
       return true;
-    } else {
+    } catch (error) {
+      console.error('Login error:', error);
       setAuthState(prev => ({ ...prev, isLoading: false }));
       return false;
     }
@@ -95,47 +107,100 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const signup = async (credentials: SignupCredentials): Promise<boolean> => {
     setAuthState(prev => ({ ...prev, isLoading: true }));
     
-    // Simulate API call delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    // Check if user already exists
-    const existingUser = mockUsers.find(u => u.email === credentials.email);
-    if (existingUser) {
+    try {
+      // Check if user already exists
+      const { data: existingUser, error: checkError } = await supabase
+        .from('users')
+        .select('*')
+        .eq('email', credentials.email)
+        .single();
+
+      if (existingUser) {
+        setAuthState(prev => ({ ...prev, isLoading: false }));
+        return false;
+      }
+
+      // Generate a unique ID for the user
+      const userId = crypto.randomUUID();
+
+      // Create user in our users table
+      const { data: userData, error: userError } = await supabase
+        .from('users')
+        .insert([{ 
+          id: userId,
+          username: credentials.username,
+          email: credentials.email,
+          password: credentials.password
+        }])
+        .select()
+        .single();
+
+      if (userError) {
+        console.error('User creation error:', userError);
+        setAuthState(prev => ({ ...prev, isLoading: false }));
+        return false;
+      }
+
+      if (userData) {
+        setAuthState({
+          user: userData,
+          isAuthenticated: true,
+          isLoading: false
+        });
+
+        // Store session in localStorage for persistence
+        localStorage.setItem('user_session', JSON.stringify(userData));
+        
+        return true;
+      }
+
+      setAuthState(prev => ({ ...prev, isLoading: false }));
+      return false;
+    } catch (error) {
+      console.error('Signup error:', error);
       setAuthState(prev => ({ ...prev, isLoading: false }));
       return false;
     }
-    
-    // Create new user
-    const newUser: User = {
-      id: Date.now().toString(),
-      name: credentials.name,
-      email: credentials.email,
-      avatar: `https://images.unsplash.com/photo-${Math.floor(Math.random() * 1000000)}?w=150&h=150&fit=crop&crop=face`
-    };
-    
-    mockUsers.push(newUser);
-    
-    setAuthState({
-      user: newUser,
-      isAuthenticated: true,
-      isLoading: false
-    });
-    localStorage.setItem('user', JSON.stringify(newUser));
-    return true;
   };
 
   const logout = () => {
-    setAuthState({
-      user: null,
-      isAuthenticated: false,
-      isLoading: false
-    });
-    localStorage.removeItem('user');
+    try {
+      // Clear session from localStorage
+      localStorage.removeItem('user_session');
+      
+      setAuthState({
+        user: null,
+        isAuthenticated: false,
+        isLoading: false
+      });
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
   };
 
-  const updateUser = (user: User) => {
-    setAuthState(prev => ({ ...prev, user }));
-    localStorage.setItem('user', JSON.stringify(user));
+  const updateUser = async (user: User) => {
+    try {
+      const { data, error } = await supabase
+        .from('users')
+        .update(user)
+        .eq('id', user.id)
+        .select()
+        .single();
+
+      if (error) {
+        console.error('Update user error:', error);
+        throw error;
+      }
+
+      if (data) {
+        setAuthState(prev => ({ ...prev, user: data }));
+        // Update localStorage with new user data
+        localStorage.setItem('user_session', JSON.stringify(data));
+      }
+    } catch (error) {
+      console.error('Update user error:', error);
+      throw error;
+    }
   };
 
   const value: AuthContextType = {

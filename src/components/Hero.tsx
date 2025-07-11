@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowDown, Sparkles } from 'lucide-react';
+import { ArrowDown, Sparkles, Palette } from 'lucide-react';
 
 const HeroSection = styled.section`
   min-height: 100vh;
@@ -57,6 +58,29 @@ const CTAButton = styled(motion.button)`
   &:hover {
     transform: translateY(-2px);
     box-shadow: 0 10px 30px rgba(239, 192, 194, 0.3);
+  }
+`;
+
+const StylerButton = styled(motion(Link))`
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  margin-left: 1rem;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+    color: white;
   }
 `;
 
@@ -153,6 +177,18 @@ const Hero: React.FC = () => {
           Explore Products
           <ArrowDown size={20} />
         </CTAButton>
+
+        <StylerButton
+          to="/styler"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <Palette size={20} />
+          3D Mannequin Styler
+        </StylerButton>
       </HeroContent>
 
       <ScrollIndicator

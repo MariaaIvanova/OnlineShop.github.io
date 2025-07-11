@@ -107,9 +107,9 @@ const Stars = styled.div`
   gap: 2px;
 `;
 
-const StarIcon = styled(Star)<{ filled: boolean }>`
-  color: ${props => props.filled ? '#ffd700' : '#e1e5e9'};
-  fill: ${props => props.filled ? '#ffd700' : 'none'};
+const StarIcon = styled(Star)<{ $filled: boolean }>`
+  color: ${props => props.$filled ? '#ffd700' : '#e1e5e9'};
+  fill: ${props => props.$filled ? '#ffd700' : 'none'};
 `;
 
 const RatingText = styled.span`
@@ -246,7 +246,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart, onLogin
           <Rating>
             <Stars>
               {[1, 2, 3, 4, 5].map(star => (
-                <StarIcon key={star} size={16} filled={star <= rating} />
+                <StarIcon key={star} size={16} $filled={star <= rating} />
               ))}
             </Stars>
             <RatingText>({rating}.0)</RatingText>

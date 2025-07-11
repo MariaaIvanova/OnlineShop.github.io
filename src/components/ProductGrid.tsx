@@ -46,11 +46,11 @@ const FilterContainer = styled.div`
   flex-wrap: wrap;
 `;
 
-const FilterButton = styled.button<{ active: boolean }>`
+const FilterButton = styled.button<{ $active: boolean }>`
   padding: 0.5rem 1.5rem;
-  border: 2px solid ${props => props.active ? '#EFC0C2' : '#e1e5e9'};
-  background: ${props => props.active ? '#EFC0C2' : 'transparent'};
-  color: ${props => props.active ? 'white' : '#333'};
+  border: 2px solid ${props => props.$active ? '#EFC0C2' : '#e1e5e9'};
+  background: ${props => props.$active ? '#EFC0C2' : 'transparent'};
+  color: ${props => props.$active ? 'white' : '#333'};
   border-radius: 25px;
   cursor: pointer;
   font-weight: 500;
@@ -58,7 +58,7 @@ const FilterButton = styled.button<{ active: boolean }>`
 
   &:hover {
     border-color: #EFC0C2;
-    background: ${props => props.active ? '#EFC0C2' : 'rgba(239, 192, 194, 0.1)'};
+    background: ${props => props.$active ? '#EFC0C2' : 'rgba(239, 192, 194, 0.1)'};
   }
 `;
 
@@ -101,7 +101,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ onAddToCart, onLoginRequired 
 
       <FilterContainer>
         <FilterButton
-          active={selectedCategory === 'all'}
+          $active={selectedCategory === 'all'}
           onClick={() => setSelectedCategory('all')}
         >
           All Products
@@ -109,7 +109,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ onAddToCart, onLoginRequired 
         {categories.slice(1).map(category => (
           <FilterButton
             key={category}
-            active={selectedCategory === category}
+            $active={selectedCategory === category}
             onClick={() => setSelectedCategory(category)}
           >
             {category.charAt(0).toUpperCase() + category.slice(1)}
@@ -119,25 +119,25 @@ const ProductGrid: React.FC<ProductGridProps> = ({ onAddToCart, onLoginRequired 
 
       <FilterContainer>
         <FilterButton
-          active={sortBy === 'featured'}
+          $active={sortBy === 'featured'}
           onClick={() => setSortBy('featured')}
         >
           Featured
         </FilterButton>
         <FilterButton
-          active={sortBy === 'price-low'}
+          $active={sortBy === 'price-low'}
           onClick={() => setSortBy('price-low')}
         >
           Price: Low to High
         </FilterButton>
         <FilterButton
-          active={sortBy === 'price-high'}
+          $active={sortBy === 'price-high'}
           onClick={() => setSortBy('price-high')}
         >
           Price: High to Low
         </FilterButton>
         <FilterButton
-          active={sortBy === 'name'}
+          $active={sortBy === 'name'}
           onClick={() => setSortBy('name')}
         >
           Name A-Z

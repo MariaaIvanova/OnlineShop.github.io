@@ -12,22 +12,21 @@ A beautiful online shop with 3D product models and user authentication system.
 
 ## Authentication System
 
-The app includes a complete authentication system that:
+The app includes a complete authentication system powered by Supabase that:
 
 - **Requires login to add items to cart**: Users must be logged in to add products to their shopping cart
-- **Persistent sessions**: User sessions are saved in localStorage
-- **Demo accounts**: Pre-configured demo accounts for testing
-- **User profiles**: Display user avatar and name in the header
+- **Persistent sessions**: User sessions are managed by Supabase Auth
+- **Real database**: User data is stored in a Supabase PostgreSQL database
+- **User profiles**: Display user username and profile picture in the header
 
-### Demo Accounts
+### Setup Required
 
-For testing purposes, the following demo accounts are available:
+Before running the application, you need to:
 
-- **Email**: john@example.com
-- **Password**: password
-
-- **Email**: jane@example.com  
-- **Password**: password
+1. **Create a Supabase project** at https://supabase.com
+2. **Set up the database** with the required table structure (see SUPABASE_SETUP.md)
+3. **Configure environment variables** with your Supabase credentials
+4. **Enable authentication** in your Supabase project settings
 
 ### How to Use
 
@@ -39,21 +38,34 @@ For testing purposes, the following demo accounts are available:
 
 ## Getting Started
 
-1. Install dependencies:
+1. **Set up Supabase** (see SUPABASE_SETUP.md for detailed instructions):
+   - Create a Supabase project
+   - Set up the users table
+   - Get your project URL and anon key
+
+2. **Configure environment variables**:
+   Create a `.env` file in the project root:
+   ```
+   VITE_SUPABASE_URL=your_supabase_project_url
+   VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+   ```
+
+3. **Install dependencies**:
    ```bash
    npm install
    ```
 
-2. Start the development server:
+4. **Start the development server**:
    ```bash
    npm run dev
    ```
 
-3. Open your browser and navigate to the local development URL
+5. **Open your browser** and navigate to the local development URL
 
 ## Technology Stack
 
 - **React 18** with TypeScript
+- **Supabase** for authentication and database
 - **Styled Components** for styling
 - **Framer Motion** for animations
 - **Three.js** with React Three Fiber for 3D graphics
@@ -83,5 +95,6 @@ src/
 2. If not logged in, login modal appears
 3. User can either login with existing account or create new account
 4. After successful authentication, user can add items to cart
-5. User session persists across browser sessions
-6. User can logout via the profile dropdown in header 
+5. User session is managed by Supabase Auth and persists across browser sessions
+6. User can logout via the profile dropdown in header
+7. User data is stored in Supabase PostgreSQL database 

@@ -61,15 +61,15 @@ const TabContainer = styled.div`
   border-bottom: 1px solid #e1e5e9;
 `;
 
-const Tab = styled.button<{ active: boolean }>`
+const Tab = styled.button<{ $active: boolean }>`
   flex: 1;
   padding: 1rem;
   background: none;
   border: none;
   cursor: pointer;
   font-weight: 600;
-  color: ${props => props.active ? '#EFC0C2' : '#666'};
-  border-bottom: 2px solid ${props => props.active ? '#EFC0C2' : 'transparent'};
+  color: ${props => props.$active ? '#EFC0C2' : '#666'};
+  border-bottom: 2px solid ${props => props.$active ? '#EFC0C2' : 'transparent'};
   transition: all 0.3s ease;
 
   &:hover {
@@ -188,7 +188,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onSuccess }) =
   });
 
   const [signupForm, setSignupForm] = useState<SignupCredentials>({
-    name: '',
+    username: '',
     email: '',
     password: '',
     confirmPassword: ''
@@ -207,7 +207,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onSuccess }) =
         onSuccess?.();
       }, 1000);
     } else {
-      setError('Invalid email or password. Try john@example.com / password');
+      setError('Invalid email or password');
     }
   };
 
@@ -265,14 +265,14 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onSuccess }) =
 
             <TabContainer>
               <Tab
-                active={activeTab === 'login'}
+                $active={activeTab === 'login'}
                 onClick={() => handleTabChange('login')}
               >
                 <LogIn size={16} style={{ marginRight: '0.5rem' }} />
                 Login
               </Tab>
               <Tab
-                active={activeTab === 'signup'}
+                $active={activeTab === 'signup'}
                 onClick={() => handleTabChange('signup')}
               >
                 <UserPlus size={16} style={{ marginRight: '0.5rem' }} />
@@ -319,11 +319,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onSuccess }) =
                     {isLoading ? 'Logging in...' : 'Login'}
                   </SubmitButton>
 
-                  <DemoInfo>
-                    <strong>Demo Account:</strong><br />
-                    Email: john@example.com<br />
-                    Password: password
-                  </DemoInfo>
+
                 </Form>
               ) : (
                 <Form onSubmit={handleSignupSubmit}>
@@ -333,9 +329,9 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onSuccess }) =
                     </InputIcon>
                     <Input
                       type="text"
-                      placeholder="Full Name"
-                      value={signupForm.name}
-                      onChange={(e) => setSignupForm(prev => ({ ...prev, name: e.target.value }))}
+                      placeholder="Username"
+                      value={signupForm.username}
+                      onChange={(e) => setSignupForm(prev => ({ ...prev, username: e.target.value }))}
                       required
                     />
                   </InputGroup>

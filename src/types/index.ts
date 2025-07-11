@@ -17,9 +17,10 @@ export interface CartItem extends Product {
 
 export interface User {
   id: string;
+  username: string;
   email: string;
-  name: string;
-  avatar?: string;
+  password: string;
+  profilePic?: string | null;
 }
 
 export interface AuthState {
@@ -34,7 +35,7 @@ export interface LoginCredentials {
 }
 
 export interface SignupCredentials {
-  name: string;
+  username: string;
   email: string;
   password: string;
   confirmPassword: string;

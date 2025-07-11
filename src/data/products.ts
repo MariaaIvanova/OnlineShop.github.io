@@ -47,6 +47,17 @@ export const products: Product[] = [
   },
   {
     id: '5',
+    name: 'Stylish Cap',
+    description: 'A trendy and fashionable cap perfect for any outfit and occasion.',
+    price: 15.99,
+    category: 'clothes',
+    image: '/models/cup1.png', // Using cup image as placeholder - you may want to add a hat preview image
+    modelPath: '/models/Cappa Catalog_Model.fbx',
+    colors: ['Black', 'White', 'Navy', 'Red'],
+    sizes: ['One Size']
+  },
+  {
+    id: '6',
     name: 'Portable Bluetooth Speaker',
     description: 'Waterproof portable speaker with 360-degree sound and 20-hour battery life.',
     price: 149.99,
@@ -56,7 +67,7 @@ export const products: Product[] = [
     sizes: ['One Size']
   },
   {
-    id: '6',
+    id: '7',
     name: 'Designer Floor Lamp',
     description: 'Contemporary floor lamp with adjustable head and touch-sensitive controls.',
     price: 249.99,
@@ -66,7 +77,7 @@ export const products: Product[] = [
     sizes: ['150cm Height']
   },
   {
-    id: '7',
+    id: '8',
     name: '4K Action Camera',
     description: 'Ultra-compact 4K camera perfect for capturing adventures with image stabilization.',
     price: 349.99,
@@ -76,7 +87,7 @@ export const products: Product[] = [
     sizes: ['One Size']
   },
   {
-    id: '8',
+    id: '9',
     name: 'Accent Armchair',
     description: 'Comfortable accent chair with premium fabric upholstery and solid wood frame.',
     price: 449.99,
@@ -86,7 +97,7 @@ export const products: Product[] = [
     sizes: ['Standard']
   },
   {
-    id: '9',
+    id: '10',
     name: 'Classic Denim Jacket',
     description: 'Timeless denim jacket with comfortable fit and durable construction.',
     price: 89.99,
@@ -96,7 +107,7 @@ export const products: Product[] = [
     sizes: ['XS', 'S', 'M', 'L', 'XL']
   },
   {
-    id: '10',
+    id: '11',
     name: 'Premium Cotton T-Shirt',
     description: 'Soft and breathable cotton t-shirt with modern fit and comfortable feel.',
     price: 29.99,
@@ -106,7 +117,7 @@ export const products: Product[] = [
     sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL']
   },
   {
-    id: '11',
+    id: '12',
     name: 'Stylish Sneakers',
     description: 'Comfortable and trendy sneakers perfect for everyday wear.',
     price: 79.99,
